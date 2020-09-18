@@ -71,7 +71,6 @@
                 element.classList.add('selected')
                 
                 document.querySelectorAll('iframe').forEach((e) => e.style.display = 'none')
-
                 document.querySelector(`#${element.dataset.frameId}`).style.display = 'initial'
             })
         });
