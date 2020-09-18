@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control</title>
+
+    <script src="https://kit.fontawesome.com/c8753f2dce.js" crossorigin="anonymous"></script>
+
+    <style>
+        html, body, .container {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .side-bar {
+            background-color: lightgrey;
+            font-size: 2rem;
+        }
+
+        .side-bar .selected {
+            background-color: black;
+            color: #FFF;
+        }
+
+        .side-bar > div {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="side-bar">
+            <div class="selected" data-frame-id="music">
+                <i class="fab fa-spotify"></i>
+            </div>
+            <div data-frame-id="lights">
+                <i class="far fa-lightbulb"></i>
+            </div>
+        </div>
+        <div class="content">
+            <iframe id="music" src="http://192.168.100.37:3000/" frameborder="0"></iframe>
+            <iframe id="lights" src="http://www.google.com" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        let buttons = document.querySelectorAll('.side-bar > div')
+
+        buttons.forEach((element) => {
+            element.addEventListener('click', () => {
+                buttons.forEach((ele) => ele.classList.remove('selected'))
+                element.classList.add('selected')
+                
+                document.querySelectorAll('iframe').forEach((e) => e.style.display = 'none')
+
+                document.querySelector(`#${element.dataset.frameId}`).style.display = 'initial'
+            })
+        });
+ 
+        document.querySelector(`#${document.querySelector('.side-bar > .selected').dataset.frameId}`).style.display = 'initial'  
+    </script>
+</body>
+</html>
