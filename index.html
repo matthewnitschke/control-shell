@@ -20,19 +20,32 @@
         .side-bar {
             background-color: lightgrey;
             font-size: 2rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .side-bar-applications {
+            height: 100%;
         }
 
-        .side-bar .selected {
+        .side-bar-applications .selected {
             background-color: black;
             color: #FFF;
         }
 
-        .side-bar > div {
+        .side-bar-applications > div {
             width: 50px;
             height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .refresh-button {
+            margin-bottom: 10px;
+            font-size:1.5rem;
         }
 
         .content {
@@ -49,12 +62,16 @@
 <body>
     <div class="container">
         <div class="side-bar">
-            <div class="selected" data-frame-id="music">
-                <i class="fab fa-spotify"></i>
+            <div class="side-bar-applications">
+                <div class="selected" data-frame-id="music">
+                    <i class="fab fa-spotify"></i>
+                </div>
+                <div data-frame-id="lights">
+                    <i class="far fa-lightbulb"></i>
+                </div>
             </div>
-            <div data-frame-id="lights">
-                <i class="far fa-lightbulb"></i>
-            </div>
+
+            <i class="refresh-button fas fa-sync-alt"></i>
         </div>
         <div class="content">
             <iframe id="music" src="http://192.168.100.37:3000/" frameborder="0"></iframe>
@@ -63,7 +80,7 @@
     </div>
 
     <script>
-        let buttons = document.querySelectorAll('.side-bar > div')
+        let buttons = document.querySelectorAll('.side-bar-applications > div')
 
         buttons.forEach((element) => {
             element.addEventListener('click', () => {
@@ -75,7 +92,9 @@
             })
         });
  
-        document.querySelector(`#${document.querySelector('.side-bar > .selected').dataset.frameId}`).style.display = 'initial'  
+        document.querySelector(`#${document.querySelector('.side-bar-applications > .selected').dataset.frameId}`).style.display = 'initial'  
+
+        document.querySelector('.refresh-button').addEventListener('click', () => location.reload());
     </script>
 </body>
 </html>
